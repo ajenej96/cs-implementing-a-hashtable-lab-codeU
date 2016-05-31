@@ -5,6 +5,8 @@ package com.flatironschool.javacs;
 
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Implementation of a HashMap using a collection of MyLinearMap and
@@ -19,7 +21,7 @@ public class MyHashMap<K, V> extends MyBetterMap<K, V> implements Map<K, V> {
 	
 	// average number of entries per map before we rehash
 	protected static final double FACTOR = 1.0;
-
+	
 	@Override
 	public V put(K key, V value) {
 		V oldValue = super.put(key, value);
@@ -40,8 +42,11 @@ public class MyHashMap<K, V> extends MyBetterMap<K, V> implements Map<K, V> {
 	 * 
 	 */
 	protected void rehash() {
-        // TODO: fill this in.
-        throw new UnsupportedOperationException();
+       
+		List<MyLinearMap<K, V>> temp = new ArrayList<MyLinearMap<K, V>>(maps);
+		makeMaps(maps.size() * 2);
+		maps = new ArrayList<MyLinearMap<K, V>>(temp);
+		
 	}
 
 	/**
